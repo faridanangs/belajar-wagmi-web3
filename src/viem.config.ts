@@ -1,13 +1,17 @@
 // 1. import module
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { http, createConfig, useClient, useConnectorClient } from "wagmi";
+import { http, createConfig, useClient, cookieStorage, createStorage } from "wagmi";
 import { base, celo, mainnet, optimism, zora , zkSync, sepolia} from "wagmi/chains";
 import { getLogs, watchAsset } from "viem/actions";
-import { walletConnect, injected, coinbaseWallet, mock } from "wagmi/connectors";
 
 // 2. set up a wagmi config
 export const config = createConfig({
   chains: [base, mainnet, optimism, zora, celo],
+  ssr: true,
+  storage: createStorage({
+    storage: cookieStorage,
+    
+  }),
   transports: {
     [base.id]: http(),
     [mainnet.id]: http(),
