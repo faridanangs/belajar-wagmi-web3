@@ -1,18 +1,21 @@
 // 1. import module
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { http, createConfig, useClient, useConnectorClient } from "wagmi";
-import { base, mainnet, optimism, zora } from "wagmi/chains";
+import { base, celo, mainnet, optimism, zora , zkSync, sepolia} from "wagmi/chains";
 import { getLogs, watchAsset } from "viem/actions";
 import { walletConnect, injected, coinbaseWallet, mock } from "wagmi/connectors";
 
 // 2. set up a wagmi config
 export const config = createConfig({
-  chains: [base, mainnet, optimism, zora],
+  chains: [base, mainnet, optimism, zora, celo],
   transports: {
     [base.id]: http(),
     [mainnet.id]: http(),
     [optimism.id]: http(),
     [zora.id]: http(),
+    [celo.id]: http(),
+    [zkSync.id]: http(),
+    [sepolia.id]: http(),
   },
 });
 
@@ -42,8 +45,8 @@ export function Example() {
 }
 
 
-declare module 'wagmi'{
-  interface Register{
-    config: typeof config
-  }
-}
+// declare module 'wagmi'{
+//   interface Register{
+//     config: typeof config
+//   }
+// }
