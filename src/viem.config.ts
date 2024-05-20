@@ -1,17 +1,26 @@
 // 1. import module
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { http, createConfig, useClient, cookieStorage, createStorage } from "wagmi";
-import { base, celo, mainnet, optimism, zora , zkSync, sepolia} from "wagmi/chains";
+import { base, celo, mainnet, optimism, zora , zkSync, sepolia, localhost} from "wagmi/chains";
 import { getLogs, watchAsset } from "viem/actions";
+import {injected, metaMask, safe, mock, walletConnect} from "wagmi/connectors"
 
 // 2. set up a wagmi config
 export const config = createConfig({
-  chains: [base, mainnet, optimism, zora, celo],
+  chains: [base, mainnet, optimism, zora, celo, localhost],
   ssr: true,
   storage: createStorage({
     storage: cookieStorage,
     
   }),
+  connectors: [
+    injected(),
+    metaMask(),
+    safe(),
+    // mock(),
+    // coinbaseWallet({ appName: 'Create Wagmi', linkAPIUrl: "" }),
+    walletConnect({ projectId: "ce6ac5e8ab546d26a66333c40be4c701" }),
+  ],
   transports: {
     [base.id]: http(),
     [mainnet.id]: http(),
@@ -20,6 +29,7 @@ export const config = createConfig({
     [celo.id]: http(),
     [zkSync.id]: http(),
     [sepolia.id]: http(),
+    [localhost.id]: http(),
   },
 });
 

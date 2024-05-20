@@ -1,5 +1,5 @@
 'use client'
-import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
 import { Example } from "@/viem.config";
 import {ErrorHandling} from "./errorHandling"
 import { useEthersProvider, useEthersSigner } from '@/client-provider-ethersjs';
@@ -13,8 +13,11 @@ function App() {
 
   const { data: ensName, isLoading: ensNameLoading, isError: ensNameError } = useEnsName({
     address: '0xf890bab546d35198A05A1Bd5f1e86d3a7d1aeeDD',
-    chainId: sepolia.id,
   });
+
+  const {data: ensAvatar} = useEnsAvatar({name: ensName!});
+
+  console.log(ensAvatar, "avatar")
 
 
   // // Mendapatkan nilai logs dari Example
