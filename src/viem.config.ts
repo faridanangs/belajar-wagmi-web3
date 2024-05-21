@@ -29,7 +29,7 @@ export const config = createConfig({
     [celo.id]: http(),
     [zkSync.id]: http(),
     [sepolia.id]: http(),
-    [localhost.id]: http(),
+    [localhost.id]: http("http://127.0.0.1:7545"),
   },
 });
 

@@ -3,7 +3,6 @@ import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 
 import { Example } from "@/viem.config";
 import {ErrorHandling} from "./errorHandling"
 import { useEthersProvider, useEthersSigner } from '@/client-provider-ethersjs';
-import { callMeReadContract } from '@/readContractTs';
 import { sepolia } from 'viem/chains';
 
 function App() {
@@ -28,7 +27,6 @@ function App() {
   // const signer = useEthersSigner();
   // console.log(signer, "Signer from ethers.JS")
 
-  callMeReadContract()
 
   return (
     <>
@@ -37,7 +35,7 @@ function App() {
         <div>
           status: {account.status}
           <br />
-          addresses: {JSON.stringify(account.addresses)}
+          addresses: {(account.address)}
           <br />
           chainId: {account.chainId}
           <br />
